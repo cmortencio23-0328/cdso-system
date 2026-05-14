@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <h1>ADMIN</h1>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="admin-dashboard.html">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="admin-approvals.html">
+                    Approvals
+                </a>
+            </li>
+
+            <li>
+                <a href="admin-reports.html">
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="system-config.html">
+                    System Config
+                </a>
+            </li>
+
+            <li>
+                <a href="/auth/logout">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="main">
+
+        <h1>MAIN ADMIN DASHBOARD</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Reports</h3>
+                <p id="totalReports">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Requisitions</h3>
+                <p id="totalRequests">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Reservations</h3>
+                <p id="totalReservations">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Pending Approvals</h3>
+                <p id="pendingApprovals">0</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

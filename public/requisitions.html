@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Requisitions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="logo"><h1>CDSO</h1></div>
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="requisitions.html">Requisitions</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <h1>REQUISITION REQUEST</h1>
+
+        <div class="table-box">
+            <h2>File Requisition</h2>
+
+            <form onsubmit="submitRequisition(event)">
+                <input class="form-control" type="text" name="fullname" placeholder="Full Name" required>
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+                <input class="form-control" type="text" name="item_name" placeholder="Item Name" required>
+                <input class="form-control" type="number" name="quantity" placeholder="Quantity" required>
+                <textarea class="form-control" name="description" placeholder="Purpose / Description" required></textarea>
+
+                <button class="btn" type="submit">Submit Request</button>
+            </form>
+        </div>
+
+        <div class="table-box">
+            <h2>Realtime Requisition Status</h2>
+
+            <table width="100%" cellpadding="15">
+                <tr>
+                    <th>Name</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+
+                <tbody id="requisitionTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

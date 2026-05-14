@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CDSO Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <h1>CDSO</h1>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="requisitions.html">
+                    Requisitions
+                </a>
+            </li>
+
+            <li>
+                <a href="reservations.html">
+                    Reservations
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="/auth/logout">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="main">
+
+        <h1>CDSO USER DASHBOARD</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Requisitions</h3>
+                <p id="totalRequests">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Reservations</h3>
+                <p id="totalReservations">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Reports</h3>
+                <p id="totalReports">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Status</h3>
+                <p>ACTIVE</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="logo"><h1>CDSO</h1></div>
+
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="requisitions.html">Requisitions</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <h1>RESERVATION REQUEST</h1>
+
+        <div class="table-box">
+            <h2>Reserve Equipment</h2>
+
+            <form onsubmit="submitReservation(event)">
+                <input class="form-control" type="text" name="fullname" placeholder="Full Name" required>
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+                <input class="form-control" type="text" name="equipment_name" placeholder="Equipment Name" required>
+                <input class="form-control" type="date" name="reservation_date" required>
+                <textarea class="form-control" name="purpose" placeholder="Purpose" required></textarea>
+
+                <button class="btn" type="submit">Reserve</button>
+            </form>
+        </div>
+
+        <div class="table-box">
+            <h2>Realtime Reservation Status</h2>
+
+            <table width="100%" cellpadding="15">
+                <tr>
+                    <th>Name</th>
+                    <th>Equipment</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+
+                <tbody id="reservationTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

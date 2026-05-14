@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Reports</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="logo"><h1>STUDENT</h1></div>
+
+        <ul>
+            <li><a href="student-dashboard.html">Dashboard</a></li>
+            <li><a href="student-reports.html">Submit Report</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <h1>STUDENT REPORT SYSTEM</h1>
+
+        <div class="table-box">
+            <h2>Submit Report</h2>
+
+            <form onsubmit="submitReport(event)" enctype="multipart/form-data">
+                <input class="form-control" type="text" name="fullname" placeholder="Full Name" required>
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+
+                <select class="form-control" name="problem_type" required>
+                    <option value="">Select Problem Type</option>
+                    <option value="Facility Damage">Facility Damage</option>
+                    <option value="Emergency Concern">Emergency Concern</option>
+                    <option value="Safety Concern">Safety Concern</option>
+                    <option value="Equipment Issue">Equipment Issue</option>
+                    <option value="Others">Others</option>
+                </select>
+
+                <textarea class="form-control" name="description" placeholder="Description" required></textarea>
+
+                <input class="form-control" type="file" name="report_file" accept="image/*,.pdf,.doc,.docx">
+
+                <button class="btn" type="submit">Upload Report</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

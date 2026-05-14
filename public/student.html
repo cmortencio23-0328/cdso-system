@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">CDSO Student</div>
+    <ul>
+        <li><a href="student.html" class="active">My Reports</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <header>
+        <h1>Student Reporting Dashboard</h1>
+        <p>Submit and monitor reports</p>
+    </header>
+
+    <div class="card">
+        <h3>Submit New Report</h3>
+        <input id="title" placeholder="Report Title">
+        <textarea id="desc" placeholder="Description"></textarea>
+        <button onclick="sendReport()">Submit Report</button>
+    </div>
+
+    <div class="card">
+        <h3>My Submitted Reports</h3>
+        <div id="myReports"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
