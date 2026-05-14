@@ -8,15 +8,19 @@ router.post('/signup', (req, res) => {
 
     if (!fullname || !email || !password) {
         return res.send(`
-            <h2>All fields are required</h2>
-            <a href="/signup.html">Back to Signup</a>
+            <script>
+                alert("All fields are required.");
+                window.location.href = "/signup.html";
+            </script>
         `);
     }
 
     if (!email.endsWith('@cca.edu.ph')) {
         return res.send(`
-            <h2>Only @cca.edu.ph email is allowed</h2>
-            <a href="/signup.html">Back to Signup</a>
+            <script>
+                alert("Only @cca.edu.ph email is allowed.");
+                window.location.href = "/signup.html";
+            </script>
         `);
     }
 
@@ -36,17 +40,20 @@ router.post('/signup', (req, res) => {
     db.query(sql, [fullname, email, password, role], (err) => {
         if (err) {
             console.log(err);
+
             return res.send(`
-                <h2>Signup Failed</h2>
-                <p>Email already exists or database error.</p>
-                <a href="/signup.html">Try Again</a>
+                <script>
+                    alert("Signup failed. Email may already exist.");
+                    window.location.href = "/signup.html";
+                </script>
             `);
         }
 
-        res.send(`
-            <h2>Account Created Successfully</h2>
-            <p>Your role is: ${role}</p>
-            <a href="/login.html">Go to Login</a>
+        return res.send(`
+            <script>
+                alert("Account created successfully! Your role is: ${role}");
+                window.location.href = "/login.html";
+            </script>
         `);
     });
 });
@@ -64,16 +71,21 @@ router.post('/login', (req, res) => {
     db.query(sql, [email, password], (err, result) => {
         if (err) {
             console.log(err);
+
             return res.send(`
-                <h2>Database Error</h2>
-                <a href="/login.html">Back to Login</a>
+                <script>
+                    alert("Database error. Please try again.");
+                    window.location.href = "/login.html";
+                </script>
             `);
         }
 
         if (result.length === 0) {
             return res.send(`
-                <h2>Invalid Email or Password</h2>
-                <a href="/login.html">Try Again</a>
+                <script>
+                    alert("Invalid email or password.");
+                    window.location.href = "/login.html";
+                </script>
             `);
         }
 
@@ -98,7 +110,7 @@ router.post('/login', (req, res) => {
             return res.redirect('/student-dashboard.html');
         }
 
-        res.redirect('/login.html');
+        return res.redirect('/login.html');
     });
 });
 
@@ -106,7 +118,13 @@ router.post('/login', (req, res) => {
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.clearCookie('connect.sid');
-        res.redirect('/login.html');
+
+        return res.send(`
+            <script>
+                alert("Logged out successfully.");
+                window.location.href = "/login.html";
+            </script>
+        `);
     });
 });
 
