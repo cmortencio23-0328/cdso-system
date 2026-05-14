@@ -6,12 +6,12 @@
     <title>Main Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
     <div class="sidebar">
-
         <div class="logo">
             <h1>MAIN ADMIN</h1>
         </div>
@@ -23,7 +23,6 @@
             <li><a href="system-config.html">System Config</a></li>
             <li><a href="/auth/logout">Logout</a></li>
         </ul>
-
     </div>
 
     <div class="main">
@@ -31,11 +30,6 @@
         <h1>MAIN ADMIN REALTIME DASHBOARD</h1>
 
         <div class="cards">
-
-            <div class="card">
-                <h3>Total Reports</h3>
-                <p id="totalReports">0</p>
-            </div>
 
             <div class="card">
                 <h3>Total Requisitions</h3>
@@ -48,38 +42,21 @@
             </div>
 
             <div class="card">
-                <h3>Pending Approvals</h3>
-                <p id="pendingApprovals">0</p>
+                <h3>Total Reports</h3>
+                <p id="totalReports">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Status</h3>
+                <p>LIVE</p>
             </div>
 
         </div>
 
         <div class="table-box">
-
-            <h2>Approval Monitoring</h2>
-
-            <table width="100%" cellpadding="15">
-
-                <tr>
-                    <th>Type</th>
-                    <th>Title</th>
-                    <th>User</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-                <tbody id="approvalTable"></tbody>
-
-            </table>
-
-        </div>
-
-        <div class="table-box">
-
-            <h2>Realtime Reports Status</h2>
+            <h2>Previous / Ongoing Reports</h2>
 
             <table width="100%" cellpadding="15">
-
                 <tr>
                     <th>Name</th>
                     <th>Problem Type</th>
@@ -89,17 +66,13 @@
                 </tr>
 
                 <tbody id="reportTable"></tbody>
-
             </table>
-
         </div>
 
         <div class="table-box">
-
-            <h2>Realtime Requisition Status</h2>
+            <h2>Previous / Ongoing Requisitions</h2>
 
             <table width="100%" cellpadding="15">
-
                 <tr>
                     <th>Name</th>
                     <th>Item</th>
@@ -108,17 +81,13 @@
                 </tr>
 
                 <tbody id="requisitionTable"></tbody>
-
             </table>
-
         </div>
 
         <div class="table-box">
-
-            <h2>Realtime Reservation Status</h2>
+            <h2>Previous / Ongoing Reservations</h2>
 
             <table width="100%" cellpadding="15">
-
                 <tr>
                     <th>Name</th>
                     <th>Equipment</th>
@@ -127,9 +96,7 @@
                 </tr>
 
                 <tbody id="reservationTable"></tbody>
-
             </table>
-
         </div>
 
     </div>
