@@ -1,21 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Admin Dashboard</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
 <div class="container">
@@ -23,48 +13,22 @@
     <div class="sidebar">
 
         <div class="logo">
-            <h1>ADMIN</h1>
+            <h1>MAIN ADMIN</h1>
         </div>
 
         <ul>
-
-            <li>
-                <a href="admin-dashboard.html">
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="admin-approvals.html">
-                    Approvals
-                </a>
-            </li>
-
-            <li>
-                <a href="admin-reports.html">
-                    Reports
-                </a>
-            </li>
-
-            <li>
-                <a href="system-config.html">
-                    System Config
-                </a>
-            </li>
-
-            <li>
-                <a href="/auth/logout">
-                    Logout
-                </a>
-            </li>
-
+            <li><a href="admin-dashboard.html">Dashboard</a></li>
+            <li><a href="admin-approvals.html">Approvals</a></li>
+            <li><a href="admin-reports.html">Reports</a></li>
+            <li><a href="system-config.html">System Config</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
         </ul>
 
     </div>
 
     <div class="main">
 
-        <h1>MAIN ADMIN DASHBOARD</h1>
+        <h1>MAIN ADMIN REALTIME DASHBOARD</h1>
 
         <div class="cards">
 
@@ -87,6 +51,84 @@
                 <h3>Pending Approvals</h3>
                 <p id="pendingApprovals">0</p>
             </div>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Approval Monitoring</h2>
+
+            <table width="100%" cellpadding="15">
+
+                <tr>
+                    <th>Type</th>
+                    <th>Title</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                <tbody id="approvalTable"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Realtime Reports Status</h2>
+
+            <table width="100%" cellpadding="15">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Problem Type</th>
+                    <th>Description</th>
+                    <th>File</th>
+                    <th>Status</th>
+                </tr>
+
+                <tbody id="reportTable"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Realtime Requisition Status</h2>
+
+            <table width="100%" cellpadding="15">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+
+                <tbody id="requisitionTable"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="table-box">
+
+            <h2>Realtime Reservation Status</h2>
+
+            <table width="100%" cellpadding="15">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Equipment</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+
+                <tbody id="reservationTable"></tbody>
+
+            </table>
 
         </div>
 
