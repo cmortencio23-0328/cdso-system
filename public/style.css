@@ -343,16 +343,38 @@ textarea.form-control {
         width: 100%;
     }
 
-    .sidebar-logo {
-    width: 75px;
-    height: 75px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 10px auto;
+    /* SCHOOL LOGO DESIGN */
+
+.sidebar-logo-box {
+    width: 55px;
+    height: 55px;
+    background: #6d9f35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px auto;
+    border-radius: 2px;
 }
 
-.logo h1 {
-    font-size: 22px;
-    margin-top: 5px;
+.sidebar-logo-box img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.login-logo-box {
+    width: 180px;
+    height: 180px;
+    background: #6d9f35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 40px auto;
+}
+
+.login-logo-box img {
+    width: 145px;
+    height: 145px;
+    object-fit: contain;
 }
 }
