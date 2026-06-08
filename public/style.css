@@ -55,7 +55,7 @@ body {
     display: block;
     text-decoration: none;
     color: white;
-    background: #1e293b;
+    background: #0b8655;
     padding: 14px;
     border-radius: 10px;
     transition: 0.3s;
@@ -186,7 +186,7 @@ textarea.form-control {
 
 .left {
     width: 50%;
-    background: #0f172a;
+    background: #0b8655;
     color: white;
     display: flex;
     flex-direction: column;
