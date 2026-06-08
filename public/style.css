@@ -363,8 +363,8 @@ textarea.form-control {
 }
 
 .login-logo-box {
-    width: 180px;
-    height: 180px;
+    width: 100px;
+    height: 100px;
     background: #6d9f35;
     display: flex;
     align-items: center;
