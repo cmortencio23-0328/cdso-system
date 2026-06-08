@@ -1,4 +1,6 @@
-/* RESET */
+/* =====================================
+   RESET
+===================================== */
 
 * {
     margin: 0;
@@ -6,7 +8,9 @@
     box-sizing: border-box;
 }
 
-/* BODY */
+/* =====================================
+   BODY
+===================================== */
 
 body {
     font-family: Arial, sans-serif;
@@ -14,14 +18,18 @@ body {
     overflow-x: hidden;
 }
 
-/* CONTAINER */
+/* =====================================
+   CONTAINER
+===================================== */
 
 .container {
     display: flex;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* =====================================
+   SIDEBAR
+===================================== */
 
 .sidebar {
     width: 260px;
@@ -67,7 +75,9 @@ body {
     color: black;
 }
 
-/* MAIN */
+/* =====================================
+   MAIN
+===================================== */
 
 .main {
     flex: 1;
@@ -80,7 +90,9 @@ body {
     color: #0f172a;
 }
 
-/* CARDS */
+/* =====================================
+   CARDS
+===================================== */
 
 .cards {
     display: grid;
@@ -107,7 +119,9 @@ body {
     color: #0f172a;
 }
 
-/* TABLE */
+/* =====================================
+   TABLE
+===================================== */
 
 .table-box {
     background: white;
@@ -144,7 +158,9 @@ table td {
     padding: 15px;
 }
 
-/* FORM */
+/* =====================================
+   FORM
+===================================== */
 
 .form-control {
     width: 100%;
@@ -160,7 +176,9 @@ textarea.form-control {
     min-height: 120px;
 }
 
-/* BUTTON */
+/* =====================================
+   BUTTON
+===================================== */
 
 .btn {
     background: #0b8655;
@@ -177,7 +195,9 @@ textarea.form-control {
     background: #0ea5e9;
 }
 
-/* LOGIN */
+/* =====================================
+   LOGIN / SIGNUP PAGE
+===================================== */
 
 .login-container {
     display: flex;
@@ -252,9 +272,74 @@ textarea.form-control {
     color: #0ea5e9;
 }
 
-/* RESPONSIVE */
+/* =====================================
+   LOGIN & SIGNUP LOGO
+===================================== */
 
-/* TABLET */
+.login-logo-box {
+    width: 170px;
+    height: 170px;
+    background: #6d9f35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.login-logo-box img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+}
+
+/* =====================================
+   SIDEBAR LOGO
+===================================== */
+
+.sidebar-logo-box {
+    width: 55px;
+    height: 55px;
+    background: #6d9f35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.sidebar-logo-box img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+}
+
+/* =====================================
+   STATUS COLORS
+===================================== */
+
+.status-approved {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: orange;
+    font-weight: bold;
+}
+
+/* =====================================
+   RESPONSIVE - TABLET
+===================================== */
 
 @media screen and (max-width: 1024px) {
 
@@ -272,7 +357,9 @@ textarea.form-control {
 
 }
 
-/* MOBILE */
+/* =====================================
+   RESPONSIVE - MOBILE
+===================================== */
 
 @media screen and (max-width: 768px) {
 
@@ -323,7 +410,9 @@ textarea.form-control {
 
 }
 
-/* SMALL MOBILE */
+/* =====================================
+   RESPONSIVE - SMALL MOBILE
+===================================== */
 
 @media screen and (max-width: 480px) {
 
@@ -343,43 +432,14 @@ textarea.form-control {
         width: 100%;
     }
 
-/* SCHOOL LOGO DESIGN */
+    .login-logo-box {
+        width: 140px;
+        height: 140px;
+    }
 
-/* FORCE LOGIN LOGO SIZE FIX */
+    .login-logo-box img {
+        width: 90px;
+        height: 90px;
+    }
 
-.login-logo-box {
-    width: 180px !important;
-    height: 180px !important;
-    background: #6d9f35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 35px auto;
-    overflow: hidden;
-}
-
-.login-logo-box img {
-    width: 140px !important;
-    height: 140px !important;
-    object-fit: contain !important;
-    display: block;
-}
-
-.sidebar-logo-box {
-    width: 55px;
-    height: 55px;
-    background: #6d9f35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 8px auto;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.sidebar-logo-box img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-}
 }
