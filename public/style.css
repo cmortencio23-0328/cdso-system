@@ -345,22 +345,24 @@ textarea.form-control {
 
 /* SCHOOL LOGO DESIGN */
 
+/* FORCE LOGIN LOGO SIZE FIX */
+
 .login-logo-box {
-    width: 10px;
-    height: 10px;
+    width: 180px !important;
+    height: 180px !important;
     background: #6d9f35;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px auto;
-    border-radius: 4px;
+    margin: 0 auto 35px auto;
     overflow: hidden;
 }
 
 .login-logo-box img {
-    width: 10px;
-    height: 10px;
-    object-fit: contain;
+    width: 140px !important;
+    height: 140px !important;
+    object-fit: contain !important;
+    display: block;
 }
 
 .sidebar-logo-box {
