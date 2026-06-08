@@ -373,8 +373,8 @@ textarea.form-control {
 }
 
 .login-logo-box img {
-    width: 145px;
-    height: 145px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
 }
 }
