@@ -343,4 +343,16 @@ textarea.form-control {
         width: 100%;
     }
 
+    .sidebar-logo {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+.logo h1 {
+    font-size: 22px;
+    margin-top: 5px;
+}
 }
