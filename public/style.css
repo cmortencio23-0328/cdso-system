@@ -25,7 +25,7 @@ body {
 
 .sidebar {
     width: 260px;
-    background: #0f172a;
+    background: #0b8655;
     color: white;
     padding: 20px;
     position: fixed;
@@ -40,7 +40,7 @@ body {
 
 .logo h1 {
     font-size: 28px;
-    color: #38bdf8;
+    color: #011118;
 }
 
 .sidebar ul {
