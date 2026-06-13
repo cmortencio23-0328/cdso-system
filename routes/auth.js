@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { db } = require('../config/firebase');
 
 /* CREATE ACCOUNT */
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
     const { fullname, email, password } = req.body;
 
     if (!fullname || !email || !password) {
@@ -32,15 +32,13 @@ router.post('/signup', (req, res) => {
         role = 'cdso';
     }
 
-    const sql = `
-        INSERT INTO users(fullname, email, password, role)
-        VALUES (?, ?, ?, ?)
-    `;
+    try {
+        const usersRef = db.collection('users');
 
-    db.query(sql, [fullname, email, password, role], (err) => {
-        if (err) {
-            console.log(err);
+        // Check if email already exists
+        const existing = await usersRef.where('email', '==', email).get();
 
+        if (!existing.empty) {
             return res.send(`
                 <script>
                     alert("Signup failed. Email may already exist.");
@@ -49,38 +47,48 @@ router.post('/signup', (req, res) => {
             `);
         }
 
+        // Create new user document
+        await usersRef.add({
+            fullname,
+            email,
+            password,
+            role,
+            createdAt: new Date()
+        });
+
         return res.send(`
             <script>
                 alert("Account created successfully! Your role is: ${role}");
                 window.location.href = "/login.html";
             </script>
         `);
-    });
+
+    } catch (err) {
+        console.log(err);
+
+        return res.send(`
+            <script>
+                alert("Signup failed. Please try again.");
+                window.location.href = "/signup.html";
+            </script>
+        `);
+    }
 });
 
 /* LOGIN */
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    const sql = `
-        SELECT * FROM users
-        WHERE email = ? AND password = ?
-        LIMIT 1
-    `;
+    try {
+        const usersRef = db.collection('users');
 
-    db.query(sql, [email, password], (err, result) => {
-        if (err) {
-            console.log(err);
+        const snapshot = await usersRef
+            .where('email', '==', email)
+            .where('password', '==', password)
+            .limit(1)
+            .get();
 
-            return res.send(`
-                <script>
-                    alert("Database error. Please try again.");
-                    window.location.href = "/login.html";
-                </script>
-            `);
-        }
-
-        if (result.length === 0) {
+        if (snapshot.empty) {
             return res.send(`
                 <script>
                     alert("Invalid email or password.");
@@ -89,10 +97,11 @@ router.post('/login', (req, res) => {
             `);
         }
 
-        const user = result[0];
+        const doc = snapshot.docs[0];
+        const user = doc.data();
 
         req.session.user = {
-            id: user.id,
+            id: doc.id,
             fullname: user.fullname,
             email: user.email,
             role: user.role
@@ -111,7 +120,17 @@ router.post('/login', (req, res) => {
         }
 
         return res.redirect('/login.html');
-    });
+
+    } catch (err) {
+        console.log(err);
+
+        return res.send(`
+            <script>
+                alert("Database error. Please try again.");
+                window.location.href = "/login.html";
+            </script>
+        `);
+    }
 });
 
 /* LOGOUT */

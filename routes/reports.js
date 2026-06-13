@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { db } = require('../config/firebase');
 const multer = require('multer');
 const path = require('path');
 
@@ -27,46 +27,77 @@ const upload = multer({
     }
 });
 
-router.post('/add', upload.single('report_file'), (req, res) => {
+router.post('/add', upload.single('report_file'), async (req, res) => {
     const { fullname, email, problem_type, description } = req.body;
     const report_file = req.file ? req.file.filename : null;
 
-    const sql = `
-        INSERT INTO reports(fullname, email, problem_type, description, report_file)
-        VALUES (?, ?, ?, ?, ?)
-    `;
-
-    db.query(sql, [fullname, email, problem_type, description, report_file], (err) => {
-        if (err) {
-            console.log(err);
-            return res.json({ success: false });
-        }
+    try {
+        await db.collection('reports').add({
+            fullname,
+            email,
+            problem_type,
+            description,
+            report_file,
+            status: 'Pending',
+            createdAt: new Date()
+        });
 
         res.json({ success: true });
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false });
+    }
 });
 
-router.get('/all', (req, res) => {
-    db.query('SELECT * FROM reports ORDER BY id DESC', (err, rows) => {
-        if (err) return res.json([]);
+router.get('/all', async (req, res) => {
+    try {
+        const snapshot = await db.collection('reports')
+            .orderBy('createdAt', 'desc')
+            .get();
+
+        const rows = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
         res.json(rows);
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json([]);
+    }
 });
 
-router.get('/analytics', (req, res) => {
-    const sql = `
-        SELECT
-        COUNT(*) AS totalReports,
-        SUM(status = 'Pending') AS pendingReports,
-        SUM(status = 'Approved') AS approvedReports,
-        SUM(status = 'Rejected') AS rejectedReports
-        FROM reports
-    `;
+router.get('/analytics', async (req, res) => {
+    try {
+        const snapshot = await db.collection('reports').get();
 
-    db.query(sql, (err, result) => {
-        if (err) return res.json({});
-        res.json(result[0]);
-    });
+        let totalReports = 0;
+        let pendingReports = 0;
+        let approvedReports = 0;
+        let rejectedReports = 0;
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            totalReports++;
+
+            if (data.status === 'Pending') pendingReports++;
+            if (data.status === 'Approved') approvedReports++;
+            if (data.status === 'Rejected') rejectedReports++;
+        });
+
+        res.json({
+            totalReports,
+            pendingReports,
+            approvedReports,
+            rejectedReports
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.json({});
+    }
 });
 
 module.exports = router;

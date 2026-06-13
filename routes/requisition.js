@@ -1,46 +1,77 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { db } = require('../config/firebase');
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     const { fullname, email, item_name, quantity, description } = req.body;
 
-    const sql = `
-        INSERT INTO requisitions(fullname, email, item_name, quantity, description)
-        VALUES (?, ?, ?, ?, ?)
-    `;
-
-    db.query(sql, [fullname, email, item_name, quantity, description], (err) => {
-        if (err) {
-            console.log(err);
-            return res.json({ success: false });
-        }
+    try {
+        await db.collection('requisitions').add({
+            fullname,
+            email,
+            item_name,
+            quantity,
+            description,
+            status: 'Pending',
+            createdAt: new Date()
+        });
 
         res.json({ success: true });
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false });
+    }
 });
 
-router.get('/all', (req, res) => {
-    db.query('SELECT * FROM requisitions ORDER BY id DESC', (err, rows) => {
-        if (err) return res.json([]);
+router.get('/all', async (req, res) => {
+    try {
+        const snapshot = await db.collection('requisitions')
+            .orderBy('createdAt', 'desc')
+            .get();
+
+        const rows = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
         res.json(rows);
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json([]);
+    }
 });
 
-router.get('/analytics', (req, res) => {
-    const sql = `
-        SELECT
-        COUNT(*) AS totalRequests,
-        SUM(status = 'Pending') AS pendingRequests,
-        SUM(status = 'Approved') AS approvedRequests,
-        SUM(status = 'Rejected') AS rejectedRequests
-        FROM requisitions
-    `;
+router.get('/analytics', async (req, res) => {
+    try {
+        const snapshot = await db.collection('requisitions').get();
 
-    db.query(sql, (err, result) => {
-        if (err) return res.json({});
-        res.json(result[0]);
-    });
+        let totalRequests = 0;
+        let pendingRequests = 0;
+        let approvedRequests = 0;
+        let rejectedRequests = 0;
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            totalRequests++;
+
+            if (data.status === 'Pending') pendingRequests++;
+            if (data.status === 'Approved') approvedRequests++;
+            if (data.status === 'Rejected') rejectedRequests++;
+        });
+
+        res.json({
+            totalRequests,
+            pendingRequests,
+            approvedRequests,
+            rejectedRequests
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.json({});
+    }
 });
 
 module.exports = router;

@@ -1,46 +1,77 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { db } = require('../config/firebase');
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
     const { fullname, email, equipment_name, reservation_date, purpose } = req.body;
 
-    const sql = `
-        INSERT INTO reservations(fullname, email, equipment_name, reservation_date, purpose)
-        VALUES (?, ?, ?, ?, ?)
-    `;
-
-    db.query(sql, [fullname, email, equipment_name, reservation_date, purpose], (err) => {
-        if (err) {
-            console.log(err);
-            return res.json({ success: false });
-        }
+    try {
+        await db.collection('reservations').add({
+            fullname,
+            email,
+            equipment_name,
+            reservation_date,
+            purpose,
+            status: 'Pending',
+            createdAt: new Date()
+        });
 
         res.json({ success: true });
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false });
+    }
 });
 
-router.get('/all', (req, res) => {
-    db.query('SELECT * FROM reservations ORDER BY id DESC', (err, rows) => {
-        if (err) return res.json([]);
+router.get('/all', async (req, res) => {
+    try {
+        const snapshot = await db.collection('reservations')
+            .orderBy('createdAt', 'desc')
+            .get();
+
+        const rows = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
         res.json(rows);
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json([]);
+    }
 });
 
-router.get('/analytics', (req, res) => {
-    const sql = `
-        SELECT
-        COUNT(*) AS totalReservations,
-        SUM(status = 'Pending') AS pendingReservations,
-        SUM(status = 'Approved') AS approvedReservations,
-        SUM(status = 'Rejected') AS rejectedReservations
-        FROM reservations
-    `;
+router.get('/analytics', async (req, res) => {
+    try {
+        const snapshot = await db.collection('reservations').get();
 
-    db.query(sql, (err, result) => {
-        if (err) return res.json({});
-        res.json(result[0]);
-    });
+        let totalReservations = 0;
+        let pendingReservations = 0;
+        let approvedReservations = 0;
+        let rejectedReservations = 0;
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            totalReservations++;
+
+            if (data.status === 'Pending') pendingReservations++;
+            if (data.status === 'Approved') approvedReservations++;
+            if (data.status === 'Rejected') rejectedReservations++;
+        });
+
+        res.json({
+            totalReservations,
+            pendingReservations,
+            approvedReservations,
+            rejectedReservations
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.json({});
+    }
 });
 
 module.exports = router;

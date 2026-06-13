@@ -1,30 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const { db } = require('../config/firebase');
 
-router.post('/update', (req, res) => {
+router.post('/update', async (req, res) => {
     const { type, id, status } = req.body;
 
-    let table = '';
+    let collectionName = '';
 
-    if (type === 'report') table = 'reports';
-    if (type === 'requisition') table = 'requisitions';
-    if (type === 'reservation') table = 'reservations';
+    if (type === 'report') collectionName = 'reports';
+    if (type === 'requisition') collectionName = 'requisitions';
+    if (type === 'reservation') collectionName = 'reservations';
 
-    if (table === '') {
+    if (collectionName === '') {
         return res.json({ success: false });
     }
 
-    const sql = `UPDATE ${table} SET status = ? WHERE id = ?`;
-
-    db.query(sql, [status, id], (err) => {
-        if (err) {
-            console.log(err);
-            return res.json({ success: false });
-        }
+    try {
+        await db.collection(collectionName).doc(id).update({ status });
 
         res.json({ success: true });
-    });
+
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false });
+    }
 });
 
 module.exports = router;
