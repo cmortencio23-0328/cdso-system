@@ -133,6 +133,18 @@ router.post('/login', async (req, res) => {
     }
 });
 
+/* CHECK SESSION */
+router.get('/me', (req, res) => {
+    if (req.session.user) {
+        return res.json({
+            loggedIn: true,
+            user: req.session.user
+        });
+    }
+
+    return res.json({ loggedIn: false });
+});
+
 /* LOGOUT */
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
